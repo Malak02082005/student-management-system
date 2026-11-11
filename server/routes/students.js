@@ -4,8 +4,8 @@ const Student = require('../models/Student');
 const router = express.Router();
 
 // Accept only known fields, so clients can't set _id, createdAt, etc.
-const pickFields = ({ name, email, rollNumber, course, year, phone }) =>
-  ({ name, email, rollNumber, course, year, phone });
+const pickFields = ({ firstName, lastName, email, rollNumber, year, course, phone }) =>
+  ({ firstName, lastName, email, rollNumber, year, course, phone });
 
 // READ all  →  GET /api/students
 router.get('/', async (req, res) => {
@@ -27,12 +27,12 @@ router.post('/', async (req, res) => {
 });
 
 // UPDATE  →  PUT /api/students/:id
+// (load → change → save, so every schema rule runs, including the course-per-year check)
 router.put('/:id', async (req, res) => {
-  const student = await Student.findByIdAndUpdate(req.params.id, pickFields(req.body), {
-    returnDocument: 'after', // return the updated document
-    runValidators: true,     // apply the schema rules on update too
-  });
+  const student = await Student.findById(req.params.id);
   if (!student) return res.status(404).json({ message: 'Student not found' });
+  student.set(pickFields(req.body));
+  await student.save();
   res.json(student);
 });
 

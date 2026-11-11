@@ -3,12 +3,14 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const studentRoutes = require('./routes/students');
+const { COURSES_BY_YEAR } = require('./data/courses');
 
 const app = express();
 app.use(cors());
 app.use(express.json()); // parse JSON request bodies
 
 app.get('/api/health', (req, res) => res.json({ status: 'ok' }));
+app.get('/api/courses', (req, res) => res.json(COURSES_BY_YEAR));
 app.use('/api/students', studentRoutes);
 
 // Unknown routes
@@ -16,6 +18,9 @@ app.use((req, res) => res.status(404).json({ message: 'Route not found' }));
 
 // Central error handler: turns errors into clean JSON responses
 app.use((err, req, res, next) => {
+  if (err.type === 'entity.parse.failed') {
+    return res.status(400).json({ message: 'Invalid JSON in request body' });
+  }
   if (err.name === 'ValidationError') {
     const message = Object.values(err.errors).map((e) => e.message).join(', ');
     return res.status(400).json({ message });
