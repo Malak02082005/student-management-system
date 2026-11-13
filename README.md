@@ -60,9 +60,9 @@ Built as **Task 2** of the Auspify Technologies Full Stack Development Internshi
 |---|---|
 | ![Student profile](docs/screenshots/profile.png) | ![Student form](docs/screenshots/form.png) |
 
-| Login | Mobile |
-|---|---|
-| ![Login](docs/screenshots/login.png) | ![Mobile view](docs/screenshots/mobile.png) |
+| Login |
+|---|
+| ![Login](docs/screenshots/login.png) |
 
 ## Project structure
 
