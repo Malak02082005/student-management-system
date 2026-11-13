@@ -6,8 +6,6 @@ Built as **Task 2** of the Auspify Technologies Full Stack Development Internshi
 
 **Tech stack:** React 19 · React Router · Vite · Node.js · Express 5 · MongoDB (Mongoose) · JWT authentication
 
-> 🔗 **Live demo:** _add your deployed link here_
-
 ---
 
 ## Features
@@ -72,7 +70,7 @@ student-management-system/
 │   ├── src/
 │   │   ├── api.js             All calls to the backend
 │   │   ├── auth/              Login state and protected-route wrapper
-│   │   ├── components/        Sidebar, table, form, details popup, icons
+│   │   ├── components/        Sidebar, student table, student form, icons
 │   │   ├── hooks/useFlash.js  Success messages passed between pages
 │   │   ├── layouts/           Sidebar + top bar around logged-in pages
 │   │   └── pages/             Login, Dashboard, Students, Profile, Add/Edit
@@ -220,4 +218,4 @@ The backend and frontend deploy separately. One common setup:
 
 ## Author
 
-**_Your Name_** · Auspify Technologies Full Stack Development Internship · [GitHub](https://github.com/your-username) · [LinkedIn](https://linkedin.com/in/your-profile)
+**Malak Makar** · Auspify Technologies Full Stack Development Internship · [GitHub](https://github.com/Malak02082005) · [LinkedIn](https://www.linkedin.com/in/makar-makar/)
