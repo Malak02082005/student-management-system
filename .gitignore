@@ -3,3 +3,7 @@ node_modules/
 dist/
 # Database backups (contain personal data)
 backups/
+
+# Videos are too big for GitHub; upload them to YouTube/Drive and link them in the README
+*.mp4
+*.mov

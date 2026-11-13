@@ -1,12 +1,18 @@
 // ---------- Login token ----------
-// Kept in sessionStorage: a page refresh keeps you logged in, but the login only lasts while the
-// tab is open. Opening the app in a new tab or after closing the browser starts at the login page.
-const TOKEN_KEY = 'sms_token';
-localStorage.removeItem(TOKEN_KEY); // older versions kept the token here; clear any leftover
+// Kept only in memory, never saved in the browser: every time the app loads (new tab, refresh,
+// reopening the browser) it starts at the login page.
+let token = null;
+// Older versions saved the token in the browser; clear any leftover copy
+localStorage.removeItem('sms_token');
+sessionStorage.removeItem('sms_token');
 
-export const getToken = () => sessionStorage.getItem(TOKEN_KEY);
-export const setToken = (token) => sessionStorage.setItem(TOKEN_KEY, token);
-export const clearToken = () => sessionStorage.removeItem(TOKEN_KEY);
+export const getToken = () => token;
+export const setToken = (value) => {
+  token = value;
+};
+export const clearToken = () => {
+  token = null;
+};
 
 // Called when the server says our token is no longer valid (expired / deleted account)
 let onUnauthorized = null;
@@ -21,17 +27,17 @@ const API_URL = (import.meta.env.VITE_API_URL || '').replace(/\/$/, '');
 
 // ---------- Shared request helper ----------
 async function request(url, options = {}) {
-  const token = getToken();
+  const authToken = getToken();
   const res = await fetch(`${API_URL}${url}`, {
     ...options,
     headers: {
       'Content-Type': 'application/json',
-      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      ...(authToken ? { Authorization: `Bearer ${authToken}` } : {}),
     },
   });
   const data = await res.json().catch(() => ({}));
 
-  if (res.status === 401 && token) {
+  if (res.status === 401 && authToken) {
     clearToken();
     onUnauthorized?.();
   }
@@ -42,7 +48,6 @@ async function request(url, options = {}) {
 // ---------- Auth ----------
 export const login = (email, password) =>
   request('/api/auth/login', { method: 'POST', body: JSON.stringify({ email, password }) });
-export const getMe = () => request('/api/auth/me');
 
 // ---------- Students & courses ----------
 const BASE = '/api/students';

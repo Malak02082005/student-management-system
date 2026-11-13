@@ -4,6 +4,8 @@ A full-stack web app for school staff to manage student records: add students, r
 
 Built as **Task 2** of the Auspify Technologies Full Stack Development Internship.
 
+🎥 **Demo video:** [Watch the demo](https://drive.google.com/file/d/1vNKOg_JVfGNz28IJkVwMhfusuF5bAppS/view)
+
 **Tech stack:** React 19 · React Router · Vite · Node.js · Express 5 · MongoDB (Mongoose) · JWT authentication
 
 ---
@@ -40,7 +42,7 @@ Built as **Task 2** of the Auspify Technologies Full Stack Development Internshi
 - Charts of students per year (for all majors or one chosen major) and students per major (click either to open the filtered list), plus recently added students.
 
 **Security**
-- Staff log in with email and password. Passwords are hashed with bcrypt, and sessions use JSON Web Tokens (8-hour expiry). The login lasts only while the browser tab is open, so the app always opens on the login page.
+- Staff log in with email and password. Passwords are hashed with bcrypt, and sessions use JSON Web Tokens (8-hour expiry). The login is kept only in memory (never saved in the browser), so the app always opens on the login page, including after a refresh.
 - Every student and course route requires a valid token.
 - Login gives the same error for an unknown email and a wrong password, so it doesn't reveal which emails have accounts.
 - The server only accepts known fields and validates everything again on its side.
