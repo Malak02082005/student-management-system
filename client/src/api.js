@@ -1,9 +1,12 @@
-// ---------- Login token (kept in the browser so a refresh doesn't log you out) ----------
+// ---------- Login token ----------
+// Kept in sessionStorage: a page refresh keeps you logged in, but the login only lasts while the
+// tab is open. Opening the app in a new tab or after closing the browser starts at the login page.
 const TOKEN_KEY = 'sms_token';
+localStorage.removeItem(TOKEN_KEY); // older versions kept the token here; clear any leftover
 
-export const getToken = () => localStorage.getItem(TOKEN_KEY);
-export const setToken = (token) => localStorage.setItem(TOKEN_KEY, token);
-export const clearToken = () => localStorage.removeItem(TOKEN_KEY);
+export const getToken = () => sessionStorage.getItem(TOKEN_KEY);
+export const setToken = (token) => sessionStorage.setItem(TOKEN_KEY, token);
+export const clearToken = () => sessionStorage.removeItem(TOKEN_KEY);
 
 // Called when the server says our token is no longer valid (expired / deleted account)
 let onUnauthorized = null;
