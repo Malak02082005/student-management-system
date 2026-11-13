@@ -1,3 +1,5 @@
 node_modules/
 .env
 dist/
+# Database backups (contain personal data)
+backups/
