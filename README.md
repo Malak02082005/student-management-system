@@ -4,7 +4,7 @@ A full-stack web app for school staff to manage student records: add students, r
 
 Built as **Task 2** of the Auspify Technologies Full Stack Development Internship.
 
-🎥 **Demo video:** [Watch the demo](https://drive.google.com/file/d/1vNKOg_JVfGNz28IJkVwMhfusuF5bAppS/view)
+🎥 **Demo video:** [Watch the demo](https://drive.google.com/file/d/1uVqcJCzmrw2kH670Omq08zRsjo-BXe-V/view)
 
 **Tech stack:** React 19 · React Router · Vite · Node.js · Express 5 · MongoDB (Mongoose) · JWT authentication
 
